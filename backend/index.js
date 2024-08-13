@@ -12,10 +12,12 @@ dotenv.config({})
 
 // cors option
 const corsOption = {
-    origin:["http://localhost:5173"],
+    origin:["https://job-portal-qkgu.onrender.com"],
     credentials:true,
     methods: ["GET", "POST", "DELETE", "PUT", "PATCH"],
 }
+
+
 app.use(cors(corsOption));
 // MiddleWare 
 app.use(express.json());
