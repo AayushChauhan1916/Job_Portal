@@ -31,11 +31,11 @@ const Signup = () => {
     formState: { errors },
   } = useForm();
 
-  useEffect(()=>{
-    if(user){
-      navigate("/")
+  useEffect(() => {
+    if (user) {
+      navigate("/");
     }
-  },[])
+  }, []);
 
   const onSubmit = async (data) => {
     try {
@@ -54,17 +54,14 @@ const Signup = () => {
         data.profile = profilePhoto;
       }
 
-      const response = await fetch(
-        `${import.meta.env.VITE_BACKEND_URL}/api/user/register`,
-        {
-          method: "POST",
-          credentials: "include",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(data),
-        }
-      );
+      const response = await fetch(`/api/user/register`, {
+        method: "POST",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
 
       const responseData = await response.json();
       if (responseData.success == true) {
@@ -264,7 +261,7 @@ const Signup = () => {
           </span>
         </form>
       </div>
-      <Footer/>
+      <Footer />
     </div>
   );
 };

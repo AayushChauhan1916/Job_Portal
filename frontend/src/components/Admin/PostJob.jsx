@@ -39,21 +39,18 @@ const PostJob = () => {
     }
     data.companyId = selectCompany;
     try {
-      const res = await fetch(
-        `${import.meta.env.VITE_BACKEND_URL}/api/job/post`,
-        {
-          method: "Post",
-          credentials: "include",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(data),
-        }
-      );
+      const res = await fetch(`/api/job/post`, {
+        method: "Post",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
       const resData = await res.json();
       if (resData.success) {
         toast.success(resData.message);
-        navigate("/admin/jobs")
+        navigate("/admin/jobs");
       } else {
         toast.error(resData.message);
       }

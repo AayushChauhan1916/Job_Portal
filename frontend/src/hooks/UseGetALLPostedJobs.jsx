@@ -1,4 +1,3 @@
-
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { setAdminJob } from "@/redux/AdminJobSlice";
@@ -8,15 +7,12 @@ const UseGetALLPostedJobs = () => {
   useEffect(() => {
     const fetchJob = async () => {
       try {
-        const response = await fetch(
-          `${import.meta.env.VITE_BACKEND_URL}/api/job/get/admin/job`,
-          {
-            method: "POST",
-            credentials:"include"
-          }
-        );
+        const response = await fetch(`/api/job/get/admin/job`, {
+          method: "POST",
+          credentials: "include",
+        });
         const responseData = await response.json();
-        if (responseData.success){
+        if (responseData.success) {
           dispatch(setAdminJob(responseData.jobs));
         }
       } catch (error) {
@@ -24,7 +20,7 @@ const UseGetALLPostedJobs = () => {
       }
     };
     fetchJob();
-  },[]);
+  }, []);
 };
 
 export default UseGetALLPostedJobs;

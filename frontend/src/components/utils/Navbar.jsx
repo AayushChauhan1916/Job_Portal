@@ -22,13 +22,10 @@ const Navbar = () => {
 
   const handleLogout = async () => {
     try {
-      const response = await fetch(
-        `${import.meta.env.VITE_BACKEND_URL}/api/user/logout`,
-        {
-          method: "GET",
-          credentials: "include",
-        }
-      );
+      const response = await fetch(`/api/user/logout`, {
+        method: "GET",
+        credentials: "include",
+      });
       const responseData = await response.json();
       if (responseData.success) {
         toast.success(responseData.message);
@@ -153,13 +150,10 @@ const SideMenu = ({ isOpen, toggleMenu, user }) => {
   const navigate2 = useNavigate();
   const handleLogout = async () => {
     try {
-      const response = await fetch(
-        `${import.meta.env.VITE_BACKEND_URL}/api/user/logout`,
-        {
-          method: "GET",
-          credentials: "include",
-        }
-      );
+      const response = await fetch(`/api/user/logout`, {
+        method: "GET",
+        credentials: "include",
+      });
       const responseData = await response.json();
       if (responseData.success) {
         toast.success(responseData.message);

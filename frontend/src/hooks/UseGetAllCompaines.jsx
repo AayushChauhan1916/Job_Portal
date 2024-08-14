@@ -6,30 +6,27 @@ import { toast } from "sonner";
 
 const UseGetAllCompaines = () => {
   const dispatch = useDispatch();
-  const user = useSelector(getUser)
+  const user = useSelector(getUser);
 
   useEffect(() => {
     const fetchCompany = async () => {
       try {
-        const res = await fetch(
-          `${import.meta.env.VITE_BACKEND_URL}/api/company/get`,
-          {
-            method: "GET",
-            credentials: "include",
-          }
-        );
+        const res = await fetch(`/api/company/get`, {
+          method: "GET",
+          credentials: "include",
+        });
         const resData = await res.json();
         if (resData.success) {
-            dispatch(setAllCompanies(resData.companies))
-        }else{
-            toast.error(resData.message);
+          dispatch(setAllCompanies(resData.companies));
+        } else {
+          toast.error(resData.message);
         }
       } catch (error) {
         toast.error(error.message || error);
       }
     };
     fetchCompany();
-  },[dispatch,user?._id]);
+  }, [dispatch, user?._id]);
 };
 
 export default UseGetAllCompaines;

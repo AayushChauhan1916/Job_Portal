@@ -8,11 +8,16 @@ import userRouter from "./routes/userRouter.js";
 import companyRouter from "./routes/companyRouter.js";
 import jobRouter from "./routes/jobRouter.js";
 import applicationRouter from "./routes/applicationRouter.js";
-dotenv.config({});
+import path from "path";
+if (process.env.NODE_ENV !== "production") {
+  require("dotenv").config();
+}
+
+app.use(express.static(path.resolve(__dirname, "dist")));
 
 // cors option
 const corsOption = {
-  origin: ["https://hireburst.netlify.app"],
+  origin: ["http://localhost:5173"],
   credentials: true,
   methods: ["GET", "POST", "DELETE", "PUT", "PATCH"],
 };

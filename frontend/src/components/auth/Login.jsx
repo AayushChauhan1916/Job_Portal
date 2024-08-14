@@ -19,34 +19,30 @@ const Login = () => {
   const navigate = useNavigate();
   const user = useSelector(getUser);
 
-
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
 
-  useEffect(()=>{
-    if(user){
-      navigate("/")
+  useEffect(() => {
+    if (user) {
+      navigate("/");
     }
-  },[])
+  }, []);
 
   const onSubmit = async (data) => {
     data.role = role;
     dispatch(setLoading(true));
     try {
-      const response = await fetch(
-        `${import.meta.env.VITE_BACKEND_URL}/api/user/login`,
-        {
-          method: "POST",
-          credentials: "include",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(data),
-        }
-      );
+      const response = await fetch(`/api/user/login`, {
+        method: "POST",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
 
       const responseData = await response.json();
       if (responseData.success == true) {

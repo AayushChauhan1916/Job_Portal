@@ -3,8 +3,6 @@ const logout = async (req, res) => {
     res
       .cookie("token", null, {
         maxAge: 0,
-        sameSite: "None",
-        domain: "https://hireburst.netlify.app",
       })
       .status(200)
       .json({

@@ -17,13 +17,10 @@ const Applicant = () => {
   useEffect(() => {
     const fetchApplicants = async () => {
       try {
-        const res = await fetch(
-          `${import.meta.env.VITE_BACKEND_URL}/api/application/${id}/applicants`,
-          {
-            method: "GET",
-            credentials: "include",
-          }
-        );
+        const res = await fetch(`/api/application/${id}/applicants`, {
+          method: "GET",
+          credentials: "include",
+        });
         const resData = await res.json();
         if (resData.success) {
           dispatch(setApplicants(resData.job));
@@ -54,7 +51,7 @@ const Applicant = () => {
           <p className="text-center text-gray-500">No applicants found.</p>
         )}
       </div>
-      <Footer/>
+      <Footer />
     </div>
   );
 };

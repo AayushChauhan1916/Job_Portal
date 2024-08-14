@@ -63,17 +63,14 @@ const EditCompany = () => {
         data.logo = logo;
       }
 
-      const response = await fetch(
-        `${import.meta.env.VITE_BACKEND_URL}/api/company/update/${id}`,
-        {
-          method: "PATCH",
-          credentials: "include",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(data),
-        }
-      );
+      const response = await fetch(`/api/company/update/${id}`, {
+        method: "PATCH",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
 
       const responseData = await response.json();
       if (responseData.success == true) {
@@ -105,7 +102,9 @@ const EditCompany = () => {
             <span>Back</span>
           </Button>
 
-          <h1 className="font-bold text-xl text-center">Edit Company Details</h1>
+          <h1 className="font-bold text-xl text-center">
+            Edit Company Details
+          </h1>
         </div>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="my-2">

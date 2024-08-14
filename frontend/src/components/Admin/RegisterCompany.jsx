@@ -22,15 +22,12 @@ const RegisterCompany = () => {
       return;
     }
     try {
-      const res = await fetch(
-        `${import.meta.env.VITE_BACKEND_URL}/api/company/register`,
-        {
-          method: "POST",
-          credentials: "include",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ companyName }),
-        }
-      );
+      const res = await fetch(`/api/company/register`, {
+        method: "POST",
+        credentials: "include",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ companyName }),
+      });
       const resData = await res.json();
       if (resData.success) {
         dispatch(setSingleCompany(resData.company));

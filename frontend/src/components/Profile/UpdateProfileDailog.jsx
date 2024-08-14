@@ -34,8 +34,6 @@ const UpdateProfileDailog = ({ editOpen, setEditOpen }) => {
     formState: { errors },
   } = useForm();
 
-  
-
   const handleResume = (e) => {
     const file = e.target.files[0];
     if (file && file.size > MAX_FILE_SIZE) {
@@ -58,21 +56,18 @@ const UpdateProfileDailog = ({ editOpen, setEditOpen }) => {
             public_id: resumeUrl.public_id,
           };
           data.resume = resumeResponse;
-        }else{
+        } else {
           toast.error(resumeUrl.message);
           return;
         }
       }
 
-      const response = await fetch(
-        `${import.meta.env.VITE_BACKEND_URL}/api/user/update`,
-        {
-          method: "POST",
-          headers: { "content-type": "application/json" },
-          credentials: "include",
-          body: JSON.stringify(data),
-        }
-      );
+      const response = await fetch(`/api/user/update`, {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        credentials: "include",
+        body: JSON.stringify(data),
+      });
 
       const responseData = await response.json();
       if (responseData.success) {
@@ -160,13 +155,14 @@ const UpdateProfileDailog = ({ editOpen, setEditOpen }) => {
               *please separate skill with ","
             </div>
             <Label className="mb-1" htmlFor="resume">
-              {user?.profile?.resume?.url?"Change Resume":"Upload Your Resume"}
+              {user?.profile?.resume?.url
+                ? "Change Resume"
+                : "Upload Your Resume"}
             </Label>
             <Input
               className="col-span-3 cursor-pointer"
               id="resume"
               type="file"
-    
               accept="application/pdf"
               onChange={handleResume}
             />
