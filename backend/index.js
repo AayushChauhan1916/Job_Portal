@@ -8,12 +8,14 @@ import userRouter from "./routes/userRouter.js";
 import companyRouter from "./routes/companyRouter.js";
 import jobRouter from "./routes/jobRouter.js";
 import applicationRouter from "./routes/applicationRouter.js";
-import path from "path";
-if (process.env.NODE_ENV !== "production") {
-  require("dotenv").config();
-}
+import { fileURLToPath } from "url";
+import { dirname, resolve } from "path";
+dotenv.config();
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
-app.use(express.static(path.resolve(__dirname, "dist")));
+// Serve static files from /dist directory
+app.use(express.static(resolve(__dirname, "dist")));
 
 // cors option
 const corsOption = {
