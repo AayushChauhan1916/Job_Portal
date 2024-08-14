@@ -12,7 +12,7 @@ dotenv.config({});
 
 // cors option
 const corsOption = {
-  origin: ["https://hireburst.netlify.app/"],
+  origin: ["https://hireburst.netlify.app"],
   credentials: true,
   methods: ["GET", "POST", "DELETE", "PUT", "PATCH"],
 };
