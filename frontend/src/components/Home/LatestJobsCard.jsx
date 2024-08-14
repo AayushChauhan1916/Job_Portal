@@ -6,13 +6,14 @@ import { Button } from "../ui/button";
 import { Avatar, AvatarImage } from "../ui/avatar";
 
 const LatestJobsCard = ({ job }) => {
+  const cardImage = job?.company?.logo?.url || "https://github.com/shadcn.png";
   return (
     <Link to={`description/${job._id}`}>
       <div className="flex flex-col p-5 rounded-md shadow-lg hover:shadow-2xl bg-white border border-gray-100 cursor-pointer m-2 min-h-[230px]">
         <div className="flex items-center gap-2 my-2">
           <Button size="icon" variant="outline" className="p-6">
             <Avatar className="cursor-pointer">
-              <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
+              <AvatarImage src={cardImage} alt="@shadcn" />
             </Avatar>
           </Button>
           <div>
