@@ -51,6 +51,8 @@ const login = async (req, res) => {
       secure: true,
       expires: Date.now() + 7 * 24 * 60 * 60 * 1000,
       maxAge: 7 * 24 * 60 * 60 * 1000,
+      sameSite: "None",
+      domain: "https://hireburst.netlify.app",
     };
 
     const userData = await User.findOne({ email: email }).select("-password");
@@ -71,6 +73,5 @@ const login = async (req, res) => {
     });
   }
 };
-
 
 export default login;
