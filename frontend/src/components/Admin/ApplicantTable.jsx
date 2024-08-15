@@ -29,9 +29,7 @@ const ApplicantTable = ({ isStatusChange, setStatusChange }) => {
     setCurrentItemId(id);
     try {
       const res = await fetch(
-        `${
-          import.meta.env.VITE_BACKEND_URL
-        }/api/application/status/${id}/update`,
+        `/api/application/status/${id}/update`,
         {
           method: "PATCH",
           credentials: "include",
