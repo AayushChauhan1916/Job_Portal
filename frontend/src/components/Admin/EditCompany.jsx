@@ -213,6 +213,7 @@ const EditCompany = () => {
           )}
         </form>
       </div>
+      <Footer/>
     </div>
   );
 };
