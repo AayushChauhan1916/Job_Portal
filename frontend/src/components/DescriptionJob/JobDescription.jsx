@@ -4,7 +4,7 @@ import { Badge } from "../ui/badge";
 import { Button } from "../ui/button";
 import { useDispatch, useSelector } from "react-redux";
 import { getUser } from "@/redux/authSlice";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { getsingleJob, setSingleJob } from "@/redux/jobSlice";
 import { getLoading, setLoading } from "@/redux/jobSlice";
 import JobDescriptionSkeleton from "./JobDescriptionSkeleton";
@@ -17,8 +17,14 @@ const JobDescription = () => {
   const job = useSelector(getsingleJob);
   const isLoading = useSelector(getLoading);
   const [isApplied, setIsApplied] = useState(false);
+  const navigate = useNavigate();
 
   const handleApplyJob = async () => {
+    if(!user){
+      toast.error("please login first...");
+      navigate("/login");
+      return;
+    }
     try {
       const res = await fetch(`/api/application/apply/${id}`, {
         method: "POST",
