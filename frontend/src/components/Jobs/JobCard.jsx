@@ -17,6 +17,8 @@ const ListedJobs = ({ job }) => {
 
   const jobPostedDate = calculateDayAgo(job.createdAt);
 
+  const imageUrl = job?.company?.logo?.url || "https://github.com/shadcn.png"
+
   return (
     <div className="p-5 rounded-md shadow-xl bg-white border-gray-200">
       <div className="flex items-center justify-between">
@@ -35,7 +37,7 @@ const ListedJobs = ({ job }) => {
       <div className="flex items-center gap-2 my-2">
         <Button size="icon" variant="outline" className="p-6">
           <Avatar className="cursor-pointer">
-            <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
+            <AvatarImage src={imageUrl} alt="@shadcn" />
           </Avatar>
         </Button>
         <div>
