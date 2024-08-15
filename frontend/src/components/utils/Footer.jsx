@@ -8,7 +8,7 @@ const Footer = () => {
         <div className="flex flex-col md:flex-row justify-between mb-8">
           {/* Company Info */}
           <div className="mb-8 md:mb-0">
-            <h3 className="text-2xl font-bold mb-4">Job Hunt</h3>
+            <h3 className="text-2xl font-bold mb-4">Job Genie</h3>
             <p className="text-gray-400 max-w-sm">
               Helping you find the best job opportunities in the industry. Join us to take your career to the next level.
             </p>
@@ -50,7 +50,7 @@ const Footer = () => {
         </div>
 
         <div className="text-center text-gray-500 text-sm">
-          &copy; {new Date().getFullYear()} Job Hunt. All rights reserved.
+          &copy; {new Date().getFullYear()} Job Genie. All rights reserved.
         </div>
       </div>
     </footer>
