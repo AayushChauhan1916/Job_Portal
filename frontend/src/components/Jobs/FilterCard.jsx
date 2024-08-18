@@ -9,15 +9,15 @@ import { setSearchJobQuery } from "@/redux/jobSlice";
 const filterData = [
   {
     filterType: "Location",
-    array: ["Delhi", "Pune", "Dhampur", "Mumbai", "Noida"],
+    array: ["Delhi", "Pune", "Banglore", "Mumbai", "Noida","Indore"],
   },
   {
     filterType: "Industry",
-    array: ["Front End", "BackEnd", "Data Science"],
+    array: ["FrontEnd", "BackEnd", "Data Science"],
   },
   {
     filterType: "Salary",
-    array: ["1-3 Lakh", "3-5 Lakh", "5-10 Lakh", "10-20 Lakh","10-90 Lakh"],
+    array: ["1-3 Lakh", "3-5 Lakh", "5-10 Lakh", "10-20 Lakh","20-90 Lakh"],
   },
 ];
 
@@ -35,7 +35,7 @@ const FilterCard = () => {
       "3-5 Lakh": "300001-500000",
       "5-10 Lakh": "500001-1000000",
       "10-20 Lakh": "1000001-2000000",
-      "10-90 Lakh": "1000001-9000000",
+      "20-90 Lakh": "2000001-9000000",
     };
     const mappedValue = salaryMap[value] || value;
     dispatch(setSearchJobQuery(mappedValue));
