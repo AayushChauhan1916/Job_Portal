@@ -113,7 +113,7 @@ const JobDescription = () => {
           </h1>
           <div className="my-4">
             <h1 className="font-bold my-1">
-              Role:{" "}
+              Positions:{" "}
               <span className="pl-4 font-normal text-gray-800">
                 {job?.position}
               </span>
@@ -127,7 +127,7 @@ const JobDescription = () => {
             <h1 className="font-bold my-1">
               Description:{" "}
               <span className="pl-4 font-normal text-gray-800">
-                {job?.description}
+                {job?.description} 
               </span>
             </h1>
             <h1 className="font-bold my-1">
@@ -140,7 +140,7 @@ const JobDescription = () => {
               Salary:{" "}
               <span className="pl-4 font-normal text-gray-800">
                 {" "}
-                {job?.salary}
+                {job?.salary} CTC
               </span>
             </h1>
             <h1 className="font-bold my-1">

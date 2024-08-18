@@ -17,13 +17,11 @@ const ListedJobs = ({ job }) => {
 
   const jobPostedDate = calculateDayAgo(job.createdAt);
 
-  const imageUrl = job?.company?.logo?.url || "https://github.com/shadcn.png"
-
   return (
-    <div className="p-5 rounded-md shadow-xl bg-white border-gray-200">
+    <div className="flex flex-col p-5 rounded-md shadow-xl bg-white border-gray-200 max-w-xs h-[340px]">
       <div className="flex items-center justify-between">
-        <p className="text-sm text-gray-500 ">
-          {jobPostedDate == 0 ? (
+        <p className="text-sm text-gray-500">
+          {jobPostedDate === 0 ? (
             <span>Today</span>
           ) : (
             <span>{jobPostedDate} day ago</span>
@@ -37,17 +35,17 @@ const ListedJobs = ({ job }) => {
       <div className="flex items-center gap-2 my-2">
         <Button size="icon" variant="outline" className="p-6">
           <Avatar className="cursor-pointer">
-            <AvatarImage src={imageUrl} alt="@shadcn" />
+            <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
           </Avatar>
         </Button>
-        <div>
-          <h1 className="font-md text-lg">{job?.company?.companyName}</h1>
+        <div className="flex-1">
+          <h1 className="font-md text-lg line-clamp-1 overflow-hidden">{job?.company?.companyName}</h1>
           <p className="text-sm text-gray-500">{job.location}</p>
         </div>
       </div>
-      <div>
-        <h1 className="font-bold text-lg my-2">{job?.title}</h1>
-        <p className="text-sm text-gray-600">{job?.description}</p>
+      <div className="flex-1">
+        <h1 className="font-bold text-lg my-2 line-clamp-1 overflow-hidden">{job?.title}</h1>
+        <p className="text-sm text-gray-600 line-clamp-2">{job?.description}</p>
       </div>
       <div className="flex items-center gap-4 mt-4">
         <Badge className={`text-blue-700 font-bold`} variant="ghost">
@@ -57,7 +55,7 @@ const ListedJobs = ({ job }) => {
           {job?.jobType}
         </Badge>
         <Badge className={`text-[#7209b7] font-bold`} variant="ghost">
-          {job.salary}
+          {job.salary} CTC
         </Badge>
       </div>
       <div className="flex items-center gap-4 mt-4">

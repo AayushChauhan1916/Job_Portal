@@ -159,13 +159,13 @@ const Signup = () => {
               placeholder="password"
               {...register("password", {
                 required: "missing",
-                // pattern: {
-                //   value:
-                //     /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/gm,
-                //   message: `at least 8 characters\n
-                //   - must contain at least 1 uppercase letter, 1 lowercase letter, and 1 number
-                //   - Can contain special characters`,
-                // },
+                pattern: {
+                  value:
+                    /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/gm,
+                  message: `at least 8 characters\n
+                  - must contain at least 1 uppercase letter, 1 lowercase letter, and 1 number
+                  - Can contain special characters`,
+                },
               })}
             />
             {errors.password && (

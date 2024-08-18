@@ -16,7 +16,7 @@ const HeroSection = () => {
   };
 
   return (
-    <div className="text-center">
+    <div className="text-center px-2 md:px-0">
       <div className="flex flex-col gap-5 my-10">
         <span className="px-4 py-2 rounded-full bg-gray-100 text-[#f83002] mx-auto font-medium">
           No. 1 Job Hunt Website

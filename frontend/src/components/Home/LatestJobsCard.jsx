@@ -23,7 +23,7 @@ const LatestJobsCard = ({ job }) => {
         </div>
         <div className="flex-grow">
           <h1 className="font-bold text-lg my-2">{job?.title}</h1>
-          <p className="text-sm text-gray-600">{job?.description}</p>
+          <p className="text-sm text-gray-600 line-clamp-2">{job?.description}</p>
         </div>
         <div className="flex items-center gap-4 mt-4">
           <Badge className={`text-blue-700 font-bold`} variant="ghost">
@@ -33,7 +33,7 @@ const LatestJobsCard = ({ job }) => {
             {job?.jobType}
           </Badge>
           <Badge className={`text-[#7209b7] font-bold`} variant="ghost">
-            {job.salary}
+            {job.salary} CTC
           </Badge>
         </div>
       </div>
