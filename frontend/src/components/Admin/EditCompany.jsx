@@ -12,6 +12,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "sonner";
 import uploadFile from "@/helper/UploadImage";
 import UseGetCompanyById from "@/hooks/UseGetCompanyById";
+import Footer from "../utils/Footer";
 
 const EditCompany = () => {
   const company = useSelector(getSingleCompany);
