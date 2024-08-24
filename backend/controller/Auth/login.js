@@ -52,7 +52,7 @@ const login = async (req, res) => {
         https://job-portal-eight-jade.vercel.app/api/user/verification/${user._id}/${emailToken.token}`;
 
         const url = `
-        Dear ${user.name},
+        Dear ${user.fullName},
         
         Thank you for signing up with Job Genie! We’re excited to have you on board.
         
