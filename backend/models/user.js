@@ -33,6 +33,10 @@ const userSchema = new Schema(
       enum: ["student", "recruiter"],
       required: [true, "role must required"],
     },
+    verified:{
+      type:Boolean,
+      default:false,
+    },
     profile: {
       bio: {
         type: String,
