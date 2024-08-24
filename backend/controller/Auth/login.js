@@ -48,20 +48,42 @@ const login = async (req, res) => {
           token: crypto.randomBytes(32).toString("hex"),
         }).save();
 
-        const url = `https://job-portal-eight-jade.vercel.app/api/user/verification/${user._id}/${emailToken.token}`;
+        const verificationUrl = `
+        https://job-portal-eight-jade.vercel.app/api/user/verification/${user._id}/${emailToken.token}`;
 
-        const isSuccess = await sendEmail(user.email,"Job Genie - Email Verification", url);
-        if(!isSuccess){
+        const url = `
+        Dear ${user.name},
+        
+        Thank you for signing up with Job Genie! We’re excited to have you on board.
+        
+        To complete your registration, please verify your email address by clicking the link below:
+        
+        ${verificationUrl}
+        
+        **Please note:** This verification link will expire in 15 minutes.
+        
+        If you did not create this account, please ignore this email.
+        
+        Best regards,
+        The Job Genie Team
+        `;
+
+        const isSuccess = await sendEmail(
+          user.email,
+          "Job Genie - Email Verification",
+          url
+        );
+        if (!isSuccess) {
           await emailToken.deleteOne();
           return res.status(500).json({
-            success:false,
+            success: false,
             message: "something went wrong, try again later",
           });
         }
       }
       return res.status(200).json({
         success: false,
-        isSend:true,
+        isSend: true,
         message: "A verification mail send to your mail",
       });
     }
