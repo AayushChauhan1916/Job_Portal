@@ -68,7 +68,7 @@ const Profile = () => {
             <Contact className="hidden md:block" />
             <p>
               <a href="tel:+91 7060457474" className="">
-                +91 7060457474
+                {user?.phoneNumber}
               </a>
             </p>
           </div>
