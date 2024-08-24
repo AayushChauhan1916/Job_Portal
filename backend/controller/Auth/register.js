@@ -52,29 +52,30 @@ const register = async (req, res) => {
      https://job-portal-eight-jade.vercel.app/api/user/verification/${user._id}/${emailToken.token}`;
 
      const url = `
-     Dear ${user.fullName},
-     
-     Thank you for signing up with Job Genie! We’re excited to have you on board.
-     
-     To complete your registration, please verify your email address by clicking the link below:
-     
-     ${verificationUrl}
-     
-     **Please note:** This verification link will expire in 15 minutes.
-     
-     If you did not create this account, please ignore this email.
-     
-     Best regards,
-     The Job Genie Team
-     
-     ---
-     
-     **Need Help?**  
-     For any queries, feel free to reach out:
-     
-     Email: [aayushchauhan1916@gmail.com](mailto:aayushchauhan1916@gmail.com)  
-     LinkedIn: [Aayush Chauhan](https://www.linkedin.com/in/aayush-chauhan1916/)
-     `;
+Dear ${user.fullName},
+
+Thank you for signing up with Job Genie! We’re excited to have you on board.
+
+To complete your registration, please verify your email address by clicking the link below:
+
+${verificationUrl}
+
+Please note: This verification link will expire in 15 minutes.
+
+If you did not create this account, please ignore this email.
+
+Best regards,
+The Job Genie Team
+
+---
+
+Need Help?
+For any queries, feel free to reach out:
+
+Email: aayushchauhan1916@gmail.com
+LinkedIn: https://www.linkedin.com/in/aayush-chauhan1916/
+`;
+
      
      
 
