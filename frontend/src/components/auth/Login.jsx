@@ -18,10 +18,12 @@ const Login = () => {
   const isLoading = useSelector(getLoading);
   const navigate = useNavigate();
   const user = useSelector(getUser);
+  const [verified, setVerified] = useState(false);
 
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm();
 
@@ -35,20 +37,25 @@ const Login = () => {
     data.role = role;
     dispatch(setLoading(true));
     try {
-      const response = await fetch(`/api/user/login`, {
-        method: "POST",
-        credentials: "include",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      });
+      const response = await fetch(
+        `/api/user/login`,{
+          method: "POST",
+          credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        }
+      );
 
       const responseData = await response.json();
       if (responseData.success == true) {
         toast.success(responseData.message);
         dispatch(setAuthUser(responseData.user));
         navigate("/");
+      } else if (responseData.isSend == true) {
+        setVerified(true);
+        reset();
       } else {
         toast.error(responseData.message);
       }
@@ -122,6 +129,11 @@ const Login = () => {
               </div>
             </RadioGroup>
           </div>
+          {verified && (
+            <div className="h-10 mb-2 bg-red-400 flex items-center justify-center rounded-md text-white">
+              <p className="font-semibold">A verification link has been sent to your email.</p>
+            </div>
+          )}
           {isLoading ? (
             <Button className="w-full my-4">
               <Loader2 className="h-4 w-4 mr-2 animate-spin" /> Please Wait...

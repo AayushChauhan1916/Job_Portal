@@ -1,5 +1,8 @@
 import User from "../../models/user.js";
 import bcrypt from "bcryptjs";
+import Token from "../../models/token.js"
+import crypto from "crypto";
+import sendEmail from "../../helpers/sendEmail.js"
 
 
 const register = async(req,res) => {
@@ -36,11 +39,28 @@ const register = async(req,res) => {
             newUser.profile.profilePhoto.public_id = profile.public_id;
         }
 
-        await newUser.save();
+        const user = await newUser.save();
+
+        const emailToken = await new Token({
+            userId:user?._id,
+            token:crypto.randomBytes(32).toString("hex")
+        }).save();
+
+        const url = `http://localhost:8080/api/user/verification/${user._id}/${emailToken.token}`;
+
+        const isSuccess = await sendEmail(user.email,"verify email",url);
+
+        if(!isSuccess){
+            await emailToken.deleteOne();
+            return res.status(500).json({
+                success:true,
+                message: "User register Successfully",
+            });
+        }
 
         res.status(200).json({
             success:true,
-            message:"User Register Successfully"
+            message:"A verification link send to your mail please verify before login"
         })
 
     }catch(error){

@@ -1,6 +1,9 @@
 import User from "../../models/user.js";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
+import Token from "../../models/token.js";
+import crypto from "crypto";
+import sendEmail from "../../helpers/sendEmail.js";
 
 const login = async (req, res) => {
   try {
@@ -34,6 +37,32 @@ const login = async (req, res) => {
       return res.status(400).json({
         success: false,
         message: "Role does not matched",
+      });
+    }
+
+    if (!user.verified) {
+      const token = await Token.findOne({ userId: user._id });
+      if (!token) {
+        const emailToken = await new Token({
+          userId: user?._id,
+          token: crypto.randomBytes(32).toString("hex"),
+        }).save();
+
+        const url = `https://job-portal-eight-jade.vercel.app/api/user/verification/${user._id}/${emailToken.token}`;
+
+        const isSuccess = await sendEmail(user.email,"Job Genie - Email Verification", url);
+        if(!isSuccess){
+          await emailToken.deleteOne();
+          return res.status(500).json({
+            success:false,
+            message: "something went wrong, try again later",
+          });
+        }
+      }
+      return res.status(200).json({
+        success: false,
+        isSend:true,
+        message: "A verification mail send to your mail",
       });
     }
 
