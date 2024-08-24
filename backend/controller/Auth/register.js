@@ -66,7 +66,17 @@ const register = async (req, res) => {
      
      Best regards,
      The Job Genie Team
+     
+     ---
+     
+     **Need Help?**  
+     For any queries, feel free to reach out:
+     
+     Email: [aayushchauhan1916@gmail.com](mailto:aayushchauhan1916@gmail.com)  
+     LinkedIn: [Aayush Chauhan](https://www.linkedin.com/in/aayush-chauhan1916/)
      `;
+     
+     
 
     const isSuccess = await sendEmail(
       user.email,
