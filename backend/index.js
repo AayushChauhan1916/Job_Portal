@@ -8,6 +8,7 @@ import userRouter from "./routes/userRouter.js";
 import companyRouter from "./routes/companyRouter.js";
 import jobRouter from "./routes/jobRouter.js";
 import applicationRouter from "./routes/applicationRouter.js";
+import path from "path";
 import { fileURLToPath } from "url";
 import { dirname, resolve } from "path";
 dotenv.config();
