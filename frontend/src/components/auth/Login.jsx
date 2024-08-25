@@ -37,16 +37,14 @@ const Login = () => {
     data.role = role;
     dispatch(setLoading(true));
     try {
-      const response = await fetch(
-        `/api/user/login`,{
-          method: "POST",
-          credentials: "include",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(data),
-        }
-      );
+      const response = await fetch(`/api/user/login`, {
+        method: "POST",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
 
       const responseData = await response.json();
       if (responseData.success == true) {
@@ -98,16 +96,27 @@ const Login = () => {
           </div>
           <div className="my-2">
             <Label htmlFor="password">Password</Label>
-            <Input
-              id="password"
-              name="password"
-              className="mt-1"
-              type="password"
-              placeholder="Password"
-              {...register("password", {
-                required: "password missing",
-              })}
-            />
+            <div className="relative">
+              <Input
+                id="password"
+                name="password"
+                className="mt-1 focus-visible:ring-offset-0"
+                type="password"
+                placeholder="Password"
+                {...register("password", {
+                  required: "Password is required",
+                })}
+              />
+              <Link
+                to="/forgot-password"
+                className="absolute right-3 top-1/2 transform -translate-y-1/2 text-red-500 text-sm"
+              >
+                Forgot?
+              </Link>
+            </div>
+            {errors.password && (
+              <p className="text-red-600">{errors.password.message}</p>
+            )}
           </div>
           <div className="flex flex-col md:flex-row items-center justify-between my-5">
             <RadioGroup
@@ -131,7 +140,9 @@ const Login = () => {
           </div>
           {verified && (
             <div className="h-10 mb-2 bg-red-400 flex items-center justify-center rounded-md text-white">
-              <p className="font-semibold">A verification link has been sent to your email.</p>
+              <p className="font-semibold">
+                A verification link has been sent to your email.
+              </p>
             </div>
           )}
           {isLoading ? (

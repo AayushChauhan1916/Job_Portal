@@ -15,6 +15,7 @@ import Applicant from "@/components/Admin/Applicant";
 import GetApplicant from "@/components/Admin/GetApplicant";
 import ProtectedRoutes from "@/components/Admin/ProtectedRoutes";
 import PageNotFound from "@/components/PageNotFound";
+import Forgot from "@/components/ForgotPassword/Forgot";
 
 const router = createBrowserRouter([
   {
@@ -100,6 +101,10 @@ const router = createBrowserRouter([
         <GetApplicant />
       </ProtectedRoutes>
     ),
+  },
+  {
+    path: "/forgot-password",
+    element: <Forgot />,
   },
   {
     path: "*", // Catch-all route for undefined paths
