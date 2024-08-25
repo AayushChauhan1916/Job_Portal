@@ -6,19 +6,19 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Button } from "../ui/button";
 import { Link, useNavigate } from "react-router-dom";
 import { Avatar, AvatarImage } from "../ui/avatar";
-import { Loader2, X } from "lucide-react";
+import { Loader2 } from "lucide-react";
 import { useForm } from "react-hook-form";
-import uploadImage from "@/helper/UploadImage";
-import { useDispatch, useSelector } from "react-redux";
-import { getLoading, getUser } from "@/redux/authSlice";
-import { setLoading } from "@/redux/authSlice";
-import { toast } from "sonner";
-import Footer from "../utils/Footer";
 import uploadFile from "@/helper/UploadImage";
+import { useDispatch, useSelector } from "react-redux";
+import { getLoading, getUser, setLoading } from "@/redux/authSlice";
+import Footer from "../utils/Footer";
+import Modal from "./SignupModal";
 
 const Signup = () => {
   const [image, setImage] = useState(null);
   const [role, setRole] = useState("student");
+  const [modalMessage, setModalMessage] = useState("");
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const dispatch = useDispatch();
   const isLoading = useSelector(getLoading);
   const navigate = useNavigate();
@@ -35,7 +35,7 @@ const Signup = () => {
     if (user) {
       navigate("/");
     }
-  }, []);
+  }, [user, navigate]);
 
   const onSubmit = async (data) => {
     try {
@@ -54,26 +54,31 @@ const Signup = () => {
         data.profile = profilePhoto;
       }
 
-      const response = await fetch(`/api/user/register`, {
-        method: "POST",
-        credentials: "include",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      });
+      const response = await fetch(
+        `${import.meta.env.VITE_BACKEND_URL}/api/user/register`,
+        {
+          method: "POST",
+          credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        }
+      );
 
       const responseData = await response.json();
-      if (responseData.success == true) {
-        toast.success(responseData.message);
-        navigate("/login");
+      if (responseData.success) {
+        setModalMessage(responseData.message);
+        setIsModalOpen(true);
       } else {
-        toast.error(responseData.message);
+        setModalMessage(responseData.message);
+        setIsModalOpen(true);
       }
       reset();
-      setImage("");
+      setImage(null);
     } catch (error) {
-      toast.error(error.message || error);
+      setModalMessage(error.message || error);
+      setIsModalOpen(true);
     } finally {
       dispatch(setLoading(false));
     }
@@ -84,12 +89,16 @@ const Signup = () => {
   };
 
   const handleRemoveImage = () => {
-    setImage("");
+    setImage(null);
+  };
+
+  const handleModalOk = () => {
+    navigate("/login");
   };
 
   return (
     <div>
-      <Navbar className=""></Navbar>
+      <Navbar />
       <div className="flex items-center justify-center max-w-7xl mx-auto">
         <form
           className="w-full md:w-1/2 border border-gray-200 rounded-md my-10 p-4"
@@ -97,9 +106,7 @@ const Signup = () => {
         >
           <h1 className="font-bold text-xl mb-5">Sign Up</h1>
           <div className="my-2">
-            <Label className="" htmlFor="name">
-              Full Name
-            </Label>
+            <Label htmlFor="name">Full Name</Label>
             <Input
               className="mt-1"
               id="name"
@@ -182,7 +189,7 @@ const Signup = () => {
               name="confirmPassword"
               {...register("confirmPassword", {
                 validate: (value, formValues) =>
-                  value === formValues.password || "password does not matched",
+                  value === formValues.password || "password does not match",
               })}
             />
             {errors.confirmPassword && (
@@ -229,39 +236,47 @@ const Signup = () => {
               <span className="text-md hover:cursor-pointer">
                 {image ? "Change Profile Image" : "Select Profile Image"}
               </span>
-
-              <span className="text-red-500 text-sm block md:inline-block">
-                {image ? "" : "Not Mandatory*"}
+              <span className="text-sm text-gray-500">
+                {image ? image.name : ""}
               </span>
             </Label>
-            {image && (
-              <X className="cursor-pointer" onClick={handleRemoveImage}></X>
-            )}
             <input
               type="file"
-              onChange={handleImage}
               id="profile"
+              accept="image/*"
+              onChange={handleImage}
               className="hidden"
             />
+            {image && (
+              <button
+                onClick={handleRemoveImage}
+                className="text-red-500 text-sm"
+              >
+                Remove
+              </button>
+            )}
           </div>
-          {isLoading ? (
-            <Button className="w-full my-4">
-              <Loader2 className="h-4 w-4 mr-2 animate-spin" /> Please Wait...
-            </Button>
-          ) : (
-            <Button className="w-full my-4" type="Submit">
-              Sign up
-            </Button>
-          )}
-          <span className="text-sm">
+          <Button
+            className="my-4 flex items-center gap-3 w-full"
+            type="submit"
+          >
+            {isLoading && <Loader2 className="animate-spin" />} Sign Up
+          </Button>
+          <div className="text-sm flex ">
             Already have an account?{" "}
-            <Link to="/login" className="text-blue-600">
+            <Link to="/login" className="text-blue-600 hover:underline ml-2">
               Login
             </Link>
-          </span>
+          </div>
         </form>
       </div>
       <Footer />
+      <Modal
+        isOpen={isModalOpen}
+        message={modalMessage}
+        onClose={() => setIsModalOpen(false)}
+        onOk={handleModalOk}
+      />
     </div>
   );
 };
