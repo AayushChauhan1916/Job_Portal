@@ -55,7 +55,7 @@ const Signup = () => {
       }
 
       const response = await fetch(
-        `${import.meta.env.VITE_BACKEND_URL}/api/user/register`,
+        `/api/user/register`,
         {
           method: "POST",
           credentials: "include",
