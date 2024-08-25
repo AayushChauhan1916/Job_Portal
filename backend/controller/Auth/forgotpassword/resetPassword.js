@@ -1,4 +1,3 @@
-
 import ForgotToken from "../../../models/forgotPasswordToken.js";
 import User from "../../../models/user.js";
 import bcrypt from "bcryptjs";
@@ -27,28 +26,28 @@ const resetPassword = async (req, res) => {
       return res.render("invalid", {
         message: "invalid token or token expired",
       });
+    } else {
+      const user = await User.findById(userId);
+
+      if (!user) {
+        return res.render("invalid", { message: "invalid action" });
+      }
+
+      const salt = await bcrypt.genSalt(15);
+
+      const hashPassword = await bcrypt.hash(password, salt);
+
+      await User.findByIdAndUpdate(userId, { password: hashPassword });
+
+      await isToken.deleteOne();
+
+      return res.status(200).render("forgotSuccessfully.ejs");
     }
-
-    const user = await User.findById(userId);
-
-    if (!user) {
-      return res.render("invalid", { message: "invalid action" });
-    }
-
-    const salt = await bcrypt.genSalt(15);
-
-    const hashPassword = await bcrypt.hash(password, salt);
-
-    await User.findByIdAndUpdate(userId,{password:hashPassword});
-
-    await isToken.deleteOne();
-
-    return res.status(200).render("forgotSuccessfully.ejs");
   } catch (error) {
-    console.log(error)
+    console.log(error);
     res.status(500).json({
-        message:"Internal Server Error, please try again later"
-    })
+      message: "Internal Server Error, please try again later",
+    });
   }
 };
 
