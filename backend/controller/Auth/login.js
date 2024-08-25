@@ -95,7 +95,7 @@ LinkedIn: https://www.linkedin.com/in/aayush-chauhan1916/
       return res.status(200).json({
         success: false,
         isSend: true,
-        message: "A verification mail send to your mail",
+        message: "Please verify your email via the link.",
       });
     }
 
