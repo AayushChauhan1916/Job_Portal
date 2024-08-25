@@ -29,7 +29,7 @@ const resetPassword = async (req, res) => {
       });
     }
 
-    const user = await User.findOne({ _id: userId });
+    const user = await User.findById(userId);
 
     if (!user) {
       return res.render("invalid", { message: "invalid action" });
