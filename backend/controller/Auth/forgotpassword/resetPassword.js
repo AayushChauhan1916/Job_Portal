@@ -43,7 +43,7 @@ const resetPassword = async (req, res) => {
 
     await isToken.deleteOne();
 
-    res.status(200).render("forgotSuccessfully.ejs");
+    return res.status(200).render("forgotSuccessfully.ejs");
   } catch (error) {
     console.log(error)
     res.status(500).json({
