@@ -40,7 +40,7 @@ const forgotPassword = async (req, res) => {
     
     We received a request to reset your password. Please use the link below to create a new password:
     
-    ${resetUrl}
+    [click here to reset password](${resetUrl})
     
     This link will expire in 15 minutes. If you did not request a password reset, please ignore this email.
     
