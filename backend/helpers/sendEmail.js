@@ -16,7 +16,7 @@ const sendEmail = async (email,subject,text) => {
             from:process.env.USER,
             to:email,
             subject:subject,
-            text:text
+            html:text
         })
 
         return true;
