@@ -90,7 +90,7 @@ const Navbar = () => {
                     <AvatarImage src={userProfileImage} alt="@shadcn" />
                   </Avatar>
                   <div>
-                    <h4 className="font-semibold">Aayush Chauhan</h4>
+                    <h4 className="font-semibold">{user?.fullName}</h4>
                     <p className="text-sm text-muted-foreground">
                       {user?.description}
                     </p>
