@@ -16,6 +16,9 @@ import GetApplicant from "@/components/Admin/GetApplicant";
 import ProtectedRoutes from "@/components/Admin/ProtectedRoutes";
 import PageNotFound from "@/components/PageNotFound";
 import Forgot from "@/components/ForgotPassword/Forgot";
+import AboutUs from "@/components/staticPage/AboutUs";
+import Services from "@/components/staticPage/Services";
+import HelpPage from "@/components/staticPage/HelpPage";
 
 const router = createBrowserRouter([
   {
@@ -41,6 +44,18 @@ const router = createBrowserRouter([
   {
     path: "/profile",
     element: <Profile />,
+  },
+  {
+    path: "/aboutus",
+    element: <AboutUs />,
+  },
+  {
+    path: "/services",
+    element: <Services/>,
+  },
+  {
+    path: "/help",
+    element: <HelpPage/>,
   },
   {
     path: "/description/:id",
