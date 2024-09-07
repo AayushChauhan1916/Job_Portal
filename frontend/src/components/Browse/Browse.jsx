@@ -33,11 +33,11 @@ const Browse = () => {
   return (
     <div>
       <Navbar />
-      <div className="max-w-7xl mx-auto my-10">
+      <div className="max-w-7xl mx-auto my-10 flex flex-col justify-center items-center ">
         <h1 className="font-bold text-xl my-10 ">
           Search Results ({localSearchJob?.length})
         </h1>
-        <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 gap-4">
           {localSearchJob?.map((job, idx) => {
             return <JobCard key={idx} job={job} />;
           })}
