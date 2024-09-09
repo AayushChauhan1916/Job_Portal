@@ -21,10 +21,7 @@ const verifyEmail = async (req, res) => {
         });
 
         if (!verifyToken) {
-            return res.status(400).json({
-                success: false,
-                message: "Invalid link",
-            });
+            return res.render("invalid.ejs",{message:"link expired"})
         }
 
         // Update the user's verified status.
